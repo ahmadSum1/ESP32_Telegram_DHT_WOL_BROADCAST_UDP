@@ -108,6 +108,7 @@ void handleNewMessages(int numNewMessages) {
   }
 }
 
+
 void setup() {
   Serial.begin(115200);
 
@@ -120,7 +121,8 @@ void setup() {
   digitalWrite(ledPin, ledState);
   
   // Connect to Wi-Fi
-  setup_wifi_reconnect();
+  // setup_wifi_reconnect();
+  wm_setup();
 
   #ifdef ESP32
     client.setCACert(TELEGRAM_CERTIFICATE_ROOT); // Add root certificate for api.telegram.org
@@ -139,7 +141,8 @@ void setup() {
 
 void loop() {
 
-  loop_wifi_reconnect(); // handle wifi disconnected situation
+  // loop_wifi_reconnect(); // handle wifi disconnected situation
+  wm_loop();
 
   if (millis() > lastTimeBotRan + botRequestDelay)  {
     int numNewMessages = bot.getUpdates(bot.last_message_received + 1);
@@ -154,6 +157,4 @@ void loop() {
   // read temp humidty
   loop_dht();
 
-  // // UDP broadcast
-  // loop_asudp();
 }
