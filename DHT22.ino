@@ -76,5 +76,8 @@ void loop_dht() {
       // UDP broadcast
       loop_asudp(dht_output);
     }
+    else{
+      Serial.println("No Wifi...");
+    }
   }
 }
